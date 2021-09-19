@@ -1,0 +1,47 @@
+---
+- name: "Docker Container For HTTP"
+  hosts: all
+  become: yes
+  vars:
+    - image_name: "Mention-Required-Image"
+    - container_name: "Mention-Container-Name" 
+    - ports: "Mention-Required-Container-Port"
+  tasks:
+    - name: "Installing PIP"
+      yum:
+        name: pip
+        state: present
+    - name: "Dependency Install dokcer-py"
+      pip:
+        name: docker-py
+        state: present
+    - name: "Installing Docker"
+      shell: amazon-linux-extras install docker -y
+    - name: "Docker Service Starting / Enabling"
+      service:
+        name: docker
+        state: restarted
+        enabled: true
+    - name: "Pulling httpd Docker Image"
+      docker_image: 
+        name: "{{image_name}}"
+        source: pull
+    - name: "Creating Docker Container"
+      docker_container:
+        name: "{{container_name}}"
+        detach: yes
+        image: "{{image_name}}"
+        ports: "{{ports}}"
+        state: started
+    - name: "Listing the Container"
+      shell: docker container ls -q
+      register: out
+    - name: debug
+      debug: var=out.stdout
+    - name: "Cronjob For Reboot"
+      cron:
+        name: "Cronjob"
+        special_time: reboot
+        job: docker container start {{ item }}
+      with_items:
+        - "{{ out.stdout_lines }}"
