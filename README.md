@@ -99,7 +99,7 @@ provisioner "ansible" {
   become: yes
   vars:
     - image_name: "httpd:2.4.48"
-    - container_name: "ajish" 
+    - container_name: "webserver" 
     - ports: "8080:80"
   tasks:
     - name: "Installing PIP"
