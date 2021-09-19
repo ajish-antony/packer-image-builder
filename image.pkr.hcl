@@ -20,7 +20,7 @@ locals {
 
 source "amazon-ebs" "ec2-docker" {
   ami_name                  = "Packer-AMI-${local.timestamp}"
-  ami_description           = "Amazon Linux 2 Imaged-AMI Created Via Packer"
+  ami_description           = "Amazon Linux 2 Image-AMI Created Via Packer"
   instance_type             = "${var.instance_type}"
   region                    = "${var.region}"
   source_ami_filter   {
