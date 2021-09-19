@@ -145,7 +145,7 @@ provisioner "ansible" {
 
 - Clone the Git repository
 ```sh
-git clone 
+git clone https://github.com/ajish-antony/packer-image-builder.git
 ```
 
 - Update the variables according to the requirements and proceeds with Image build using the below command
