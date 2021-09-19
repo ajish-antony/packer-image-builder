@@ -67,7 +67,6 @@ source "amazon-ebs" "ec2-docker" {
   ami_description           = "Amazon Linux 2 Image-AMI Created Via Packer"
   instance_type             = "${var.instance_type}"
   region                    = "${var.region}"
-  security_group_ids        = ["sg-0ef0ddc40580e6a0a"]
   source_ami_filter   {
     filters                 = {
       name                  = "amzn2-ami-hvm-2.0.*.1-x86_64-ebs"
