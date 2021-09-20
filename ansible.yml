@@ -33,15 +33,4 @@
         image: "{{image_name}}"
         ports: "{{ports}}"
         state: started
-    - name: "Listing the Container"
-      shell: docker container ls -q
-      register: out
-    - name: debug
-      debug: var=out.stdout
-    - name: "Cronjob For Reboot"
-      cron:
-        name: "Cronjob"
-        special_time: reboot
-        job: docker container start {{ item }}
-      with_items:
-        - "{{ out.stdout_lines }}"
+
