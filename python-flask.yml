@@ -1,0 +1,53 @@
+---
+- name: "Docker Image build & Push To Docker Hub"
+  hosts: localhost
+  become: true
+  vars:
+    git_repo_url: "https://github.com/ajish-antony/python-flask.git"
+    git_clone: "/var/git/"
+    image_name: "ajishantony2020/python-flask"
+    docker_password: "ajishantony1."
+
+  tasks:
+    - name: "Installing PIP"
+      yum:
+        name:
+          - pip
+          - git
+        state: present
+    - name: "Dependency Install dokcer-py"
+      pip:
+        name: docker-py
+        state: present
+    - name: "Cloning the conetents From GitHub"
+      git:
+        repo: '{{git_repo_url}}'
+        dest: '{{git_clone}}'
+      register: repo_status
+    - name: "Installing Docker"
+      shell: amazon-linux-extras install docker -y
+    - name: "Docker Service Starting / Enabling"
+      service:
+        name: docker
+        state: restarted
+        enabled: true
+    - name: "Log into DockerHub"
+      docker_login:
+        username: ajishantony2020
+        password: "{{docker_password}}"
+    - name: "Build Python Image"
+      docker_image:
+        source: build
+        build:
+          path: "{{git_clone}}"
+        name: "{{image_name}}"
+        tag: latest
+        push: true
+    - name: "Removing Image Created"
+      docker_image:
+        state: absent
+        name: "{{ image_name }}"
+        tag: "{{ item }}"
+      with_items:
+        - "{{ repo_status.after }}"
+        - latest
