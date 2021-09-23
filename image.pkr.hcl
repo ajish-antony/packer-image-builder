@@ -32,6 +32,6 @@ build {
   sources = ["source.amazon-ebs.ec2-docker"]
 
 provisioner "ansible" {
-      playbook_file = "/var/pack/ansible.yml"
+      playbook_file = "Mention-Ansible-File-Location"
   }
 }
