@@ -1,0 +1,38 @@
+---
+- name: "Docker Container For Python-Flask"
+  hosts: all
+  become: yes
+  vars:
+    - image_name: "Mention-Image-Name"
+    - container_name: "Mention-Container-Name"
+    - ports: "8081:5000"
+  tasks:
+    - name: "Installing PIP"
+      yum:
+        name:
+          - pip
+          - git
+        state: present
+    - name: "Dependency Install dokcer-py"
+      pip:
+        name: docker-py
+        state: present
+    - name: "Installing Docker"
+      shell: amazon-linux-extras install docker -y
+    - name: "Docker Service Starting / Enabling"
+      service:
+        name: docker
+        state: restarted
+        enabled: true
+    - name: "Pulling httpd Docker Image"
+      docker_image:
+        name: "{{image_name}}"
+        source: pull
+    - name: "Creating Docker Container"
+      docker_container:
+        name: "{{container_name}}"
+        detach: yes
+        restart_policy: always
+        image: "{{image_name}}"
+        ports: "{{ports}}"
+        state: started
