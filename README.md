@@ -239,7 +239,7 @@ alt_txt
 
 ![
 alt_txt
-](https://i.ibb.co/28z8gYV/pipleline.jpg)
+](https://i.ibb.co/5rg619b/pipeline.png)
 
 #### Packer Image Build
 
