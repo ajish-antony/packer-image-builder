@@ -243,7 +243,7 @@ alt_txt
 
 #### Packer Image Build
 
-- Update the variables according to the requirements in the files and proceeds with Image build using the below command
+- For manually building the packer AMI. Update the variables according to the requirements in the files and proceeds with Image build using the below command
 
 ```sh
 packer build image.pkr.hcl
