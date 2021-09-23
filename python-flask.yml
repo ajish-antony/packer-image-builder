@@ -6,7 +6,8 @@
     git_repo_url: "Mention-GitHub-Repository"
     git_clone: "Mention-Clone-Directory"
     image_name: "Mention-Image-Name"
-    docker_password: "Mention-Docker-Password"
+    docker_password: "Mention-DockerHub-Password"
+    docker_username: "Mention-DockerHub-Username"
 
   tasks:
     - name: "Installing PIP"
@@ -33,7 +34,7 @@
         enabled: true
     - name: "Log into DockerHub"
       docker_login:
-        username: ajishantony2020
+        username: "{{docker_username}}"
         password: "{{docker_password}}"
     - name: "Build Python Image"
       docker_image:
