@@ -251,7 +251,7 @@ packer build image.pkr.hcl
 
 ## Conclusion
 
-Here I have made use of the HashiCorp Packer which makes Image creation easier. A single line can be defined as once the developer uploads the python application code  to Github, the automation process will create a DocKer image and uploads it to the Docker Hub, and further, an AMI will be created with packer having docker container provisioned with an image of python flask application from Docker Hub. 
+Here I have made use of the HashiCorp Packer which makes Image creation easier. A single line can be defined as once the developer uploads the python application code  to Github, the automation process will create a Docker image and uploads it to the Docker Hub, and further, an AMI will be created with packer having docker container provisioned with an image of python flask application from Docker Hub. 
 
 
 
